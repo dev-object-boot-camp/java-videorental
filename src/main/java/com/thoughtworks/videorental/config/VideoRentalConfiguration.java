@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
 
 import java.util.Arrays;
-import java.util.GregorianCalendar;
 
 @Configuration
 @Order(0)
@@ -28,9 +27,11 @@ public class VideoRentalConfiguration  {
         final Movie findingNemo = new Movie("Finding Nemo", releaseDate);
         final Movie imitationGame = new Movie("Imitation Game", (new LocalDateTime().minusDays(10)));
         final Movie theoryOfEverything = new Movie("Theory of EveryThing",new LocalDateTime());
+        final Movie noteBook = new Movie("Note Book", new LocalDateTime().minusDays(450));
+        final Movie godFather = new Movie("God Father", new LocalDateTime().minusDays(1000));
 
 
-        return new SetBasedMovieRepository(Arrays.asList(avatar, upInTheAir, findingNemo,imitationGame,theoryOfEverything));
+        return new SetBasedMovieRepository(Arrays.asList(avatar, upInTheAir, findingNemo,imitationGame,theoryOfEverything,godFather,noteBook));
     }
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)

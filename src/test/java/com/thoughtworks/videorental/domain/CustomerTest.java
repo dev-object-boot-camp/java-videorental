@@ -17,6 +17,7 @@ public class CustomerTest {
     private Customer customer;
     private Set<Rental> mixedRentals;
     private Set<Rental> mixedRentals2;
+    private Set<Rental> classicRentals;
 
     @Before
     public void setUp() {
@@ -28,9 +29,11 @@ public class CustomerTest {
         final Movie starTrek = new Movie("Star Trek 13.2", releaseDate);
         final Movie WallaceAndGromit = new Movie("Wallace and Gromit", releaseDate);
         final Movie newMovie = new Movie ("Imitation Game",new LocalDateTime());
+        final Movie classicMovie = new Movie("Note Book", new LocalDateTime().minusDays(600));
 
         mixedRentals = new LinkedHashSet<Rental>();
         mixedRentals2 = new LinkedHashSet<Rental>();
+        classicRentals = new LinkedHashSet<Rental>();
         LocalDateTime rentedOn = new LocalDateTime();
         mixedRentals.add(new Rental(customer, montyPython, Period.days(3), rentedOn));
         mixedRentals.add(new Rental(customer, ran, Period.days(1), rentedOn));
@@ -39,6 +42,7 @@ public class CustomerTest {
         mixedRentals.add(new Rental(customer, WallaceAndGromit, Period.days(6), rentedOn));
         mixedRentals2.addAll(mixedRentals);
         mixedRentals2.add(new Rental(customer,newMovie,Period.days(5),rentedOn));
+        classicRentals.add(new Rental(customer,classicMovie,Period.days(10),rentedOn));
     }
 
     @Test
@@ -74,6 +78,15 @@ public class CustomerTest {
                         + "  Imitation Game  -  $9.0\n"
                         + "Amount charged is $22.0";
         assertEquals(expected, customer.statement(mixedRentals2));
+    }
+
+    @Test
+    public void testCustomerRentalForClassicMovies() throws Exception {
+        String expected =
+                "Rental Record for John Smith\n"
+                        + "  Note Book  -  $4.5\n"
+                        + "Amount charged is $4.5";
+        assertEquals(expected, customer.statement(classicRentals));
     }
 
 }
