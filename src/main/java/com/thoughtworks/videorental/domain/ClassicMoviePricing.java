@@ -7,11 +7,7 @@ import com.thoughtworks.videorental.domain.PricingStrategy;
  */
 public class ClassicMoviePricing implements PricingStrategy {
     public double getRentalPrice( int daysRented){
-        if(daysRented <= 6)
-            return daysRented*.5;
-        if(daysRented == 7)
-            return 3;
-
+        if(daysRented <= 6) return daysRented*.5;
         return (daysRented-7)*.5 + 3;
     }
 }

@@ -25,10 +25,11 @@ public class Customer implements Principal{
             // show figures for this rental
             final Integer rentalDays = rental.getPeriod().getDays();
 
+            PricingStrategyFactory pricingStrategyFactory = new PricingStrategyFactory();
             result += "  " + rental.getMovie().getTitle() + "  -  $"
-                    + String.valueOf(rental.getMovie().getCharge(rentalDays)) + "\n";
+                    + String.valueOf(rental.getMovie().getCharge(rentalDays, pricingStrategyFactory)) + "\n";
 
-            totalAmount += rental.getMovie().getCharge(rentalDays);
+            totalAmount += rental.getMovie().getCharge(rentalDays, pricingStrategyFactory);
         }
 
         // add footer lines

@@ -17,7 +17,7 @@ public class Movie {
         return title;
     }
 
-    public double getCharge(final int daysRented) {
-        return new PricingStrategyFactory().getPricingStrategy(releaseDate).getRentalPrice(daysRented);
+    public double getCharge(final int daysRented,PricingStrategyFactory pricingStrategyFactory) {
+        return pricingStrategyFactory.getPricingStrategy(releaseDate).getRentalPrice(daysRented);
     }
 }
